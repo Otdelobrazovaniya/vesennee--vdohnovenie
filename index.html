@@ -30,4 +30,88 @@
       padding: 40px;
       background: rgba(255,255,255,0.95);
       border-radius: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    input[type="text"] {
+      width: 100%; padding: 12px; margin: 10px 0;
+      border-radius: 10px; border: 1px solid #ccc; font-size: 1em;
+    }
+    button {
+      width: 100%; padding: 15px; background: #ff4081;
+      color: white; border: none; border-radius: 15px;
+      font-size: 1.1em; cursor: pointer; transition: 0.3s;
+    }
+    button:hover { background: #e91e63; }
+    .hidden { display: none; }
+    .petal {
+      position: fixed; width: 20px; height: 20px;
+      background: url('https://i.ibb.co/9WqF2R3/petal-pink.png') no-repeat center/contain;
+      pointer-events: none; animation: fall linear infinite; opacity: 0.8;
+    }
+    @keyframes fall {
+      0% {transform: translateY(-50px) rotate(0deg);}
+      100% {transform: translateY(110vh) rotate(360deg);}
+    }
+  </style>
+</head>
+<body>
+
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+</audio>
+
+<div class="section" id="registration">
+  <h1>Көктемгі шабыт</h1>
+  <p>8 наурыз мерекесіне арналған тіркеу / Регистрация к 8 марта</p>
+  <input type="text" id="fullname" placeholder="Толық аты-жөніңіз / ФИО">
+  <input type="text" id="position" placeholder="Лауазымыңыз / Должность">
+  <input type="text" id="school" placeholder="Мектеп атауы / Школа">
+  <button onclick="submitForm()">Тіркелу / Зарегистрироваться</button>
+</div>
+
+<div class="section hidden" id="thankyou">
+  <h1> С международным женским днём! / 8 наурыз Халықаралық әйелдер күні құтты болсын </h1>
+  <p><strong>Құрметті педагог қыз-келіншектер!</strong><br>
+     Сіздерді Халықаралық әйелдер күнімен шын жүректен құттықтаймыз!<br>
+     Көктем сіздің өміріңізге қуаныш, үйлесім және шабыт әкелсін.<br>
+     Сіздерге балаларға және қоғамға күнделікті беретін даналық, шыдамдылық және баға жетпес еңбектеріңіз үшін рахмет!</p>
+  <p><strong>Дорогие дамы!</strong><br>
+     Сердечно поздравляем вас с Международным женским днём!<br>
+     Пусть весна принесёт в вашу жизнь радость, гармонию и вдохновение.<br>
+     Спасибо вам за мудрость, терпение и бесценный труд,<br>
+     который вы ежедневно дарите детям и обществу.</p>
+</div>
+
+<script>
+function submitForm() {
+  const fullname = document.getElementById('fullname').value.trim();
+  const position = document.getElementById('position').value.trim();
+  const school = document.getElementById('school').value.trim();
+  if(!fullname || !position || !school){
+    alert('Барлық өрістерді толтырыңыз / Заполните все поля');
+    return;
+  }
+  document.getElementById('registration').classList.add('hidden');
+  document.getElementById('thankyou').classList.remove('hidden');
+  document.getElementById('thankyou').scrollIntoView({behavior:"smooth"});
+}
+
+function createPetals() {
+  const numPetals = 40;
+  for(let i=0;i<numPetals;i++){
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    petal.style.left = Math.random()*100 + 'vw';
+    petal.style.animationDuration = (5+Math.random()*5) + 's';
+    petal.style.animationDelay = Math.random()*5 + 's';
+    petal.style.width = (15+Math.random()*20) + 'px';
+    petal.style.height = (15+Math.random()*20) + 'px';
+    document.body.appendChild(petal);
+  }
+}
+createPetals();
+</script>
+
+</body>
+</html>
  
